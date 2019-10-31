@@ -1,26 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
+import  RpClock from './components/clock';
+import RpAlarm from './components/oneAlarm';
+
+import Fullscreen from "react-full-screen";
+import Button from 'react-bootstrap/Button';
 import './App.css';
 
-function App() {
-  return (
+const  App = () => {
+		const [fullScs, setFullScs] = useState(false);
+
+		useEffect(() => {
+	//		setFullScs(true);
+		},
+		[]);
+		
+		return(
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+			<Fullscreen enabled={fullScs}  >
+				<RpClock></RpClock>
+				<RpAlarm ></RpAlarm>
+			</Fullscreen>
+			<Button onClick={() => setFullScs(!fullScs) }>Go Fullscreen</Button>
     </div>
-  );
-}
+)};
 
 export default App;

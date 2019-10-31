@@ -3,8 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "bootstrap": "^4.3.1",
+    "moment": "^2.24.0",
     "react": "^16.11.0",
+    "react-battery": "^1.0.0",
+    "react-bootstrap": "^1.0.0-beta.14",
     "react-dom": "^16.11.0",
+    "react-full-screen": "^0.2.4",
     "react-scripts": "3.2.0"
   },
   "scripts": {
