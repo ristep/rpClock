@@ -1,0 +1,31 @@
+.picker .clock .alarm{
+  text-align: center;
+  background-color: black;
+  min-height: 10vh;
+  flex-direction: column;
+  justify-content: center;
+  font-size: calc(24px);
+  color: yellow;
+}
+
+.fullscreen .clock{
+  background-color: black;
+  min-height: 40vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(28px + 18vmin);
+  color: rgb(8, 61, 8);
+}
+
+.fullscreen .alarm{
+  background-color: black;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 12vmin);
+  color: rgb(77, 8, 8);
+}
