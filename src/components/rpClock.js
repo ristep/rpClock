@@ -1,5 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import moment from 'moment';
+import styled from 'styled-components';
+
+const Div = styled.div`
+  background-color: black;
+  display: flex;
+	flex-direction: row;
+	align-items: center;
+  justify-content: center;
+  font-size: calc(28px + 14vmin);
+  color: rgb(8, 61, 8);
+`;
 
 const timeString = (sg, format ) => {
 	if(format)
@@ -17,9 +28,9 @@ const RpClock = (props) => {
   },[]);
 	
 	return(
-	<div className={className}  {...rest}>
+	<Div className={className}  {...rest}>
 		<p>{children} {lTime}</p>
-	</div>
+	</Div>
 )
 };
 
