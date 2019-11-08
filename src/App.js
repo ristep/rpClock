@@ -3,6 +3,13 @@ import RpClock from './components/rpClock';
 import OneAlarm from './components/oneAlarm';
 import styled from 'styled-components';
 import Fullscreen from "react-full-screen";
+import logo from "./logo240.png";
+
+const Img = styled.img`
+  position: absolute;
+  top: 8px;
+  left: 6px;	height: 8ch;
+`;
 
 const AppBox = styled.div`
   text-align: center;
@@ -49,7 +56,7 @@ const ButtonDark = styled.button`
   -webkit-transition: .3s;
   -moz-transition: .3s;
   -o-transition: .3s;
-  display: inline-block;
+  display: inline-block; 
    /* color */
 	color:  rgb(8, 61, 8);
 	background-color:  rgb(8, 6, 8);
@@ -66,6 +73,7 @@ const  App = () => {
 		return(
     <AppBox>
 			<Fullscreen enabled={isFull} 	onChange={isFull => setIsFull(isFull) }>
+				<Img src={logo} alt="logo" />
 				{ isFull ?
 				 	<ButtonDark onClick={() => setIsFull(false)} >Exit Full Screen</ButtonDark>
 					:
