@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import moment from 'moment';
-import TimePicker from './timePicker';
+import TimeAdder from './timeAdder';
 import styled from 'styled-components';
 
 const Div = styled.div`
@@ -19,33 +19,62 @@ const timeString = (sg) => {
 
 const OneAlarm = (props) => {
 	const { className, children, fullScreen, ...rest } = props;
-	const [alMoment, setAlMoment] = useState(moment({ h:8, m:4, s:10 }).add(1,'day'));
-	const [alString, setAlString] = useState(timeString(alMoment));
 
-	function addMinutes(val){
-		console.log(val);
-		setAlMoment(moment(alMoment).add(val,'minutes'));
+	const [alTime, setAlTime] = useState({ h: 6, m: 0 });
+
+	const addMin = (val) => {
+		alTime.m += val;
+		if (alTime.m > 59) {
+			alTime.m = alTime.m - 60;
+			addHour(1);
+		}
+		if (alTime.m < 0) {
+			alTime.m = 60 + alTime.m;
+			addHour(-1);
+		}
+		setAlTime({ h: alTime.h, m: alTime.m });
 	};
 
-	useEffect(() => {
-		const int = setInterval( () => { //console.log(moment().format("HH:mm"));
-			if( alMoment < moment() ) {
-				setAlString('Stavaj bree!');
-				clearInterval(int);
-			}
-		},
-		1000 )
-	},
-	[]);
-	
-	return(
-	<Div className={className}  {...rest}>
-		{children} {timeString(alMoment)}
-		{!fullScreen && 
-			<TimePicker className='picker' addMin={addMinutes}></TimePicker>
+	const addHour = (val) => {
+		alTime.h += val;
+		if (alTime.h > 23) {
+			alTime.h = alTime.h - 24;
 		}
-	</Div>
-)
+		if (alTime.h < 0) {
+			alTime.h = 24 + alTime.h;
+		}
+		setAlTime({ h: alTime.h, m: alTime.m });
+	};
+
+	const zeroMan = (val) => val < 10 ? "0" + val.toString() : val.toString();
+
+	const timeRender = () => {
+		const min = zeroMan(alTime.m);
+		const hour = zeroMan(alTime.h);
+		return (
+			<div>
+				{hour}:{min}
+				{!fullScreen &&
+					<TimeAdder addMin={addMin} addHour={addHour}></TimeAdder>
+				}
+			</div>
+		)
+	}
+
+	useEffect(() => {
+		const int = setInterval(() => {
+			// if( alMoment < moment() ) {	clearInterval(int);	}
+			//setAlUntil(moment().diff(alMoment));
+		},
+			1000)
+	},
+		[]);
+
+	return (
+		<Div className={className}  {...rest}>
+			{timeRender()}
+		</Div>
+	)
 };
 
 export default OneAlarm;
