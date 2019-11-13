@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import RpClock from './components/rpClock';
 import OneAlarm from './components/oneAlarm';
 import styled from 'styled-components';

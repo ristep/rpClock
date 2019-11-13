@@ -13,14 +13,40 @@ const Div = styled.div`
   color: rgb(77, 8, 8);
 `;
 
-const timeString = (sg) => {
-	return moment(sg).format("HH:mm");
-};
-
 const OneAlarm = (props) => {
 	const { className, children, fullScreen, ...rest } = props;
 
-	const [alTime, setAlTime] = useState({ h: 6, m: 0 });
+	const [alRinging, setAlRinging] = useState(false);
+	const [alTime, setAlTime] = useState({ h: 6, m: 5, inio: true });
+
+	useEffect(() => {
+		if(!alTime.inio)
+			localStorage.setItem('AlarmTime', JSON.stringify(alTime));
+		console.log(alTime);
+	},
+		[alTime]
+	);
+
+	const ringRing = () => {
+		const aloTim = JSON.parse(localStorage.getItem("AlarmTime"));
+		return moment().hour() === aloTim.h && moment().minute() === aloTim.m
+	};
+
+	useEffect(() => {
+		if (localStorage.getItem("AlarmTime") != null) {
+			setAlTime(JSON.parse(localStorage.getItem("AlarmTime")));
+		}
+		setInterval(() => {
+			if (ringRing()) {
+				setAlRinging(true);
+			}
+			else {
+				setAlRinging(false);
+			}
+		}, 1000)
+	},
+		[]
+	);
 
 	const addMin = (val) => {
 		alTime.m += val;
@@ -57,21 +83,15 @@ const OneAlarm = (props) => {
 				{!fullScreen &&
 					<TimeAdder addMin={addMin} addHour={addHour}></TimeAdder>
 				}
+				{alRinging &&
+					<h3>Ring Ring</h3>
+				}
 			</div>
 		)
 	}
 
-	useEffect(() => {
-		const int = setInterval(() => {
-			// if( alMoment < moment() ) {	clearInterval(int);	}
-			//setAlUntil(moment().diff(alMoment));
-		},
-			1000)
-	},
-		[]);
-
 	return (
-		<Div className={className}  {...rest}>
+		<Div className={className} {...rest}>
 			{timeRender()}
 		</Div>
 	)

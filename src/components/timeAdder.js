@@ -39,16 +39,6 @@ const Button = styled.button`
   }
 `;
 
-const Label = styled.label`
-  width: 30%;
-  display: inline-block;
-  color: beige;
-  font-size: 1em;
-  padding: 0 0em 0em 0em;
-  border: 2px solid darkgreen;
-  border-radius: 3px;
-`;
-
 const TimePicker = props => {
 	const { className, children, addMin, addHour, ...rest } = props;
 
