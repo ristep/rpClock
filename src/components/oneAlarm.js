@@ -30,7 +30,7 @@ const OneAlarm = (props) => {
 	useEffect(() => {
 		const int = setInterval( () => { //console.log(moment().format("HH:mm"));
 			if( alMoment < moment() ) {
-				setAlString('Stavaaaaaj bree!');
+				setAlString('Stavaj bree!');
 				clearInterval(int);
 			}
 		},
