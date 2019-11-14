@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import moment from 'moment';
 import TimeAdder from './timeAdder';
 import styled from 'styled-components';
@@ -17,19 +17,28 @@ const OneAlarm = (props) => {
 	const { className, children, fullScreen, ...rest } = props;
 
 	const [alRinging, setAlRinging] = useState(false);
-	const [alTime, setAlTime] = useState({ h: 6, m: 5, inio: true });
+	const [alTime, setAlTime] = useState({ h: 6, m: 5, first: true });
+	const isFirstRun = useRef(true);
 
 	useEffect(() => {
-		if(!alTime.inio)
-			localStorage.setItem('AlarmTime', JSON.stringify(alTime));
-		console.log(alTime);
+		const { first, ...rest } = alTime; 
+		if(first){
+			if (localStorage.getItem("AlarmTime") === null){
+				localStorage.setItem('AlarmTime', JSON.stringify(rest));
+			}
+		}else{
+			localStorage.setItem('AlarmTime', JSON.stringify(rest));
+		}	
 	},
 		[alTime]
 	);
 
 	const ringRing = () => {
-		const aloTim = JSON.parse(localStorage.getItem("AlarmTime"));
-		return moment().hour() === aloTim.h && moment().minute() === aloTim.m
+		if (localStorage.getItem("AlarmTime") != null) {
+			const aloTim = JSON.parse(localStorage.getItem("AlarmTime"));
+			return moment().hour() === aloTim.h && moment().minute() === aloTim.m;
+		}
+		return false;
 	};
 
 	useEffect(() => {
