@@ -29,12 +29,14 @@ const MediaPlayer = () => {
 	const videoLink = "https://www.youtube.com/embed/"+videoID+"?list=RDlSzICmwmRsA&t=12"; //+"?autoplay=1&playsinline=1&fullscreen=1";
 	return (
 			<Div>
-				 <Player url={videoLink} playing />
+				 <Player url={videoLink} playing controls={true} />
 			</Div>
 	)
 }
 
 export default MediaPlayer;
+
+
 // {/* <Iframe src={videoLink} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen " ></Iframe> */}
 
 // import { Media, Player, controls } from 'react-media-player';
