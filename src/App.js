@@ -3,7 +3,7 @@ import RpClock from './components/rpClock';
 import OneAlarm from './components/oneAlarm';
 import styled from 'styled-components';
 import Fullscreen from "react-full-screen";
-import logo from "./logo240.png";
+import logo from "./logo.svg";
 
 const Img = styled.img`
   position: absolute;
@@ -11,34 +11,34 @@ const Img = styled.img`
   left: 6px;	height: 8ch;
 `;
 
+// const Icon = styled.svg`
+//   flex: none;
+//   transition: fill 0.25s;
+//   width: 48px;
+//   height: 48px;
+//  `;
+
 const AppBox = styled.div`
   text-align: center;
   background-color: black;
   flex-direction: column;
-  justify-content: center;
-  font-size: calc(24px);
-  color: yellow;
+  justify-content: center; 
 `;
 
 const Button = styled.button`
-	box-shadow: 0px 1px 0px 0px #fff6af;
-	background:linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
-	background-color:#ffec64;
-	border-radius:6px;
-	border:1px solid #ffaa22;
+	box-shadow: 0px 10px 14px -7px #9acc85;
+	background:linear-gradient(to bottom, #74ad5a 5%, #68a54b 100%);
+	background-color:#74ad5a;
+	border-radius:8px;
 	display:inline-block;
 	cursor:pointer;
-	color: #333333;
+	color:#ffffff;
 	font-family:Arial;
-	font-size:15px;
+	font-size:20px;
 	font-weight:bold;
-	padding:6px 24px;
+	padding:13px 32px;
 	text-decoration:none;
-	text-shadow:0px 1px 0px #ffee66;
-:hover {
-	background:linear-gradient(to bottom, #ffab23 5%, #ffec64 100%);
-	background-color:#ffab23;
-}
+	text-shadow:0px 1px 0px #92b879;}
 :active {
 	position:relative;
 	top:1px;
@@ -59,7 +59,7 @@ const ButtonDark = styled.button`
   display: inline-block; 
    /* color */
 	color:  rgb(8, 61, 8);
-	background-color:  rgb(8, 6, 8);
+	background-color:  rgb(8, 6, 8, 0.2);
   border: 2px  rgb(8, 61, 8) solid;
 :hover {
   color: #fff;
@@ -67,22 +67,36 @@ const ButtonDark = styled.button`
 }
 `;
 
-const  App = () => {
-		const [isFull, setIsFull] = useState(false);
+const DivSticky = styled.div`
+  position: absolute;
+	top: 0;
+	left: 43%;
+`;
 
-		return(
-    <AppBox>
-			<Fullscreen enabled={isFull} 	onChange={isFull => setIsFull(isFull) }>
+const DivD = styled.div`
+`;
+
+const App = () => {
+	const [isFull, setIsFull] = useState(false);
+
+	return (
+		<AppBox>
+			<Fullscreen enabled={isFull} onChange={isFull => setIsFull(isFull)}>
 				<Img src={logo} alt="logo" />
-				{ isFull ?
-				 	<ButtonDark onClick={() => setIsFull(false)} >Exit Full Screen</ButtonDark>
-					:
-					<Button onClick={() => setIsFull(true)} >Full Screen</Button>
-				}	 
-				<RpClock></RpClock>
-				<OneAlarm fullScreen={isFull}>Al: </OneAlarm>
+				<DivD>
+					<RpClock></RpClock>
+					<OneAlarm fullScreen={isFull} setActiv={() => setIsFull(true)} ></OneAlarm>
+				</DivD>
+				<DivSticky>
+					{isFull ?
+						<ButtonDark onClick={() => setIsFull(false)} >Exit Full Screen</ButtonDark>
+						:
+						<Button onClick={() => setIsFull(true)} >Full Screen</Button>
+					}
+				</DivSticky>
 			</Fullscreen>
-    </AppBox>
-)};
+		</AppBox>
+	)
+};
 
 export default App;

@@ -8,6 +8,7 @@
     "react-battery": "^1.0.0",
     "react-dom": "^16.11.0",
     "react-full-screen": "^0.2.4",
+    "react-player": "^1.14.1",
     "react-scripts": "3.2.0",
     "styled-components": "^4.4.1"
   },

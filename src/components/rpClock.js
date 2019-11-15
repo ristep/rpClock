@@ -8,7 +8,8 @@ const Div = styled.div`
 	flex-direction: row;
 	align-items: center;
   justify-content: center;
-  font-size: calc(28px + 14vmin);
+	font-size: calc(28px + 14vmin);
+	/* font-size: 14vmin; */
   color: rgb(8, 61, 8);
 `;
 

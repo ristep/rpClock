@@ -1,24 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import moment from 'moment';
-import TimeAdder from './timeAdder';
-import styled from 'styled-components';
-
-const Div = styled.div`
- 	background-color: black;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 12vmin);
-  color: rgb(77, 8, 8);
-`;
+import TimeSelect from './alarmTimeRender';
 
 const OneAlarm = (props) => {
-	const { className, children, fullScreen, ...rest } = props;
-
 	const [alRinging, setAlRinging] = useState(false);
 	const [alTime, setAlTime] = useState({ h: 6, m: 5, first: true });
-	const isFirstRun = useRef(true);
 
 	useEffect(() => {
 		const { first, ...rest } = alTime; 
@@ -80,29 +66,11 @@ const OneAlarm = (props) => {
 		}
 		setAlTime({ h: alTime.h, m: alTime.m });
 	};
-
-	const zeroMan = (val) => val < 10 ? "0" + val.toString() : val.toString();
-
-	const timeRender = () => {
-		const min = zeroMan(alTime.m);
-		const hour = zeroMan(alTime.h);
-		return (
-			<div>
-				{hour}:{min}
-				{!fullScreen &&
-					<TimeAdder addMin={addMin} addHour={addHour}></TimeAdder>
-				}
-				{alRinging &&
-					<h3>Ring Ring</h3>
-				}
-			</div>
-		)
-	}
-
+	
 	return (
-		<Div className={className} {...rest}>
-			{timeRender()}
-		</Div>
+		<div>
+				<TimeSelect {...props} alRinging={alRinging} time={alTime} addMin={addMin} addHour={addHour}></TimeSelect>
+		</div>
 	)
 };
 
