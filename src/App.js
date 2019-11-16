@@ -1,22 +1,9 @@
 import React, { useState } from 'react';
 import RpClock from './components/rpClock';
 import OneAlarm from './components/oneAlarm';
+import Logo from './components/logoComp';
 import styled from 'styled-components';
 import Fullscreen from "react-full-screen";
-import logo from "./logo.svg";
-
-const Img = styled.img`
-  position: absolute;
-  top: 8px;
-  left: 6px;	height: 8ch;
-`;
-
-// const Icon = styled.svg`
-//   flex: none;
-//   transition: fill 0.25s;
-//   width: 48px;
-//   height: 48px;
-//  `;
 
 const AppBox = styled.div`
   text-align: center;
@@ -82,7 +69,7 @@ const App = () => {
 	return (
 		<AppBox>
 			<Fullscreen enabled={isFull} onChange={isFull => setIsFull(isFull)}>
-				<Img src={logo} alt="logo" />
+				<Logo></Logo> 
 				<DivD>
 					<RpClock></RpClock>
 					<OneAlarm fullScreen={isFull} setActiv={() => setIsFull(true)} ></OneAlarm>
